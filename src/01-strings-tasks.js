@@ -249,7 +249,7 @@ function encodeToRot13(/* str */) {
  *   isString(new String('test')) => true
  */
 function isString(value) {
-  return (typeof value) === 'string';
+  return (typeof value === 'string') || (value instanceof String);
 }
 
 
@@ -277,8 +277,10 @@ function isString(value) {
  *   'Q♠' => 50
  *   'K♠' => 51
  */
-function getCardId(/* value */) {
-  throw new Error('Not implemented');
+function getCardId(value) {
+  const suit = '♣♦♥♠';
+  const cards = 'A234567891JQK';
+  return suit.indexOf(value[value.length - 1]) * 13 + cards.indexOf(value[0]);
 }
 
 
