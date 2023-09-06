@@ -198,8 +198,8 @@ function findFirstSingleChar(str) {
  *   5, 3, true, true   => '[3, 5]'
  *
  */
-function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
-  throw new Error('Not implemented');
+function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
+  return `${['(', '[', ')', ']'][+isStartIncluded]}${a > b ? b : a}, ${a > b ? a : b}${['(', '[', ')', ']'][isEndIncluded + 2]}`;
 }
 
 
@@ -275,9 +275,10 @@ function isCreditCardNumber(/* ccn */) {
  *   10000 ( 1+0+0+0+0 = 1 ) => 1
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
-function getDigitalRoot(/* num */) {
-  // let result = num.toString().split('').reduce() ;
-  throw new Error('Not implemented');
+function getDigitalRoot(num) {
+  const number = num.toString().split('').reduce((sum, elem) => sum + Number(elem), 0);
+  if (number > 9) return getDigitalRoot(number);
+  return number;
 }
 
 
@@ -327,8 +328,8 @@ function isBracketsBalanced(/* str */) {
  *    365, 4  => '11231'
  *    365, 10 => '365'
  */
-function toNaryString(/* num, n */) {
-  throw new Error('Not implemented');
+function toNaryString(num, n) {
+  return num.toString(n);
 }
 
 
@@ -402,8 +403,12 @@ function getMatrixProduct(/* m1, m2 */) {
  *    [    ,   ,    ]]
  *
  */
-function evaluateTicTacToePosition(/* position */) {
-  throw new Error('Not implemented');
+function evaluateTicTacToePosition(p) {
+  const result = p.map((e) => e.join('')).concat(p.map((el, i, a) => `${a[0][i]}${a[1][i]}${a[2][i]}`))
+    .concat(`${p[0][0]}${p[1][1]}${p[2][2]}`).concat(`${p[0][2]}${p[1][1]}${p[2][0]}`);
+  if (result.includes('000')) return '0';
+  if (result.includes('XXX')) return 'X';
+  return undefined;
 }
 
 
