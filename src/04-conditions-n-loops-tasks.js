@@ -257,8 +257,11 @@ function reverseInteger(num) {
  *   5436468789016589 => false
  *   4916123456789012 => false
  */
-function isCreditCardNumber(/* ccn */) {
-  throw new Error('Not implemented');
+function isCreditCardNumber(ccn) {
+  return ccn.toString().split('').reverse()
+    .map((elem, index) => (index % 2 === 0 ? elem : elem * 2))
+    .map((e) => (e.toString().length === 2 ? Number(e.toString()[1]) + Number(e.toString()[0]) : e))
+    .reduce((sum, elem) => sum + +elem, 0) % 10 === 0;
 }
 
 /**
@@ -303,8 +306,22 @@ function getDigitalRoot(num) {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
-function isBracketsBalanced(/* str */) {
-  throw new Error('Not implemented');
+function isBracketsBalanced(str) {
+  const openBrackets = '[{(<';
+  const closeBrackets = ']})>';
+  let i = 1;
+  let s = str;
+  while (s !== '') {
+    if (closeBrackets.includes(s[i])) {
+      if (s[i - 1] === openBrackets[closeBrackets.indexOf(s[i])]) {
+        s = s.slice(0, i - 1) + s.slice(i + 1);
+        i -= 2;
+      }
+    }
+    if (i > str.length) return false;
+    i += 1;
+  }
+  return true;
 }
 
 
