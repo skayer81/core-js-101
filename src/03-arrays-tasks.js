@@ -268,9 +268,8 @@ function getSecondItems(arr) {
  *  [ 1,2,3,4,5 ] => [ 1, 2,2, 3,3,3, 4,4,4,4, 5,5,5,5,5 ]
  */
 function propagateItemsByPositionIndex(arr) {
-  return arr.map((elem, index) => Array(index + 1).fill(elem).join(',')).join().split(',');
+  return [].concat(...arr.map((elem, index) => Array(index + 1).fill(elem)));
 }
-
 
 /**
  * Returns the 3 largest numbers from the specified array
@@ -356,8 +355,8 @@ function getItemsSum(arr) {
  *  [ -1, 'false', null, 0 ] => 2
  *  [ null, undefined, NaN, false, 0, '' ]  => 6
  */
-function getFalsyValuesCount(/* arr */) {
-  throw new Error('Not implemented');
+function getFalsyValuesCount(arr) {
+  return arr.reduce((sum, elem) => sum + +(Boolean(elem) === false), 0);
 }
 
 /**
@@ -446,8 +445,8 @@ function sortCitiesArray(arr) {
  *           [0,0,0,1,0],
  *           [0,0,0,0,1]]
  */
-function getIdentityMatrix(/* n */) {
-  throw new Error('Not implemented');
+function getIdentityMatrix(n) {
+  return Array(n).fill(Array(n).fill(0)).map((el, i) => el.map((el2, i2) => (i === i2 ? 1 : 0)));
 }
 
 /**
@@ -530,10 +529,9 @@ function group(/* array, keySelector, valueSelector */) {
  *   [[1, 2], [3, 4], [5, 6]], (x) => x     =>   [ 1, 2, 3, 4, 5, 6 ]
  *   ['one','two','three'], (x) => x.split('')  =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
-function selectMany(/* arr, childrenSelector */) {
-  throw new Error('Not implemented');
+function selectMany(arr, childrenSelector) {
+  return [].concat(...arr.map((elem) => childrenSelector(elem)));
 }
-
 
 /**
  * Returns an element from the multidimensional array by the specified indexes.
