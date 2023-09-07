@@ -109,8 +109,9 @@ function getLinearEquationRoot(a, b) {
  *   (0,1) (0,1)     => 0
  *   (0,1) (1,2)     => 0
  */
-function getAngleBetweenVectors(/* x1, y1, x2, y2 */) {
-  throw new Error('Not implemented');
+function getAngleBetweenVectors(x1, y1, x2, y2) {
+  return [Math.PI, Math.PI / 2, 0][(x1 * x2 + y1 * y2)
+    / (((x1 ** 2 + y1 ** 2) ** 0.5) * (x2 ** 2 + y2 ** 2) ** 0.5) + 1];
 }
 
 /**
@@ -201,8 +202,15 @@ function roundToPowerOfTen(num, pow) {
  *   16 => false
  *   17 => true
  */
-function isPrime(/* n */) {
-  throw new Error('Not implemented');
+function isPrime(n) {
+  if (n <= 1) return false;
+  const absnum = Math.abs(n);
+  const f = n ** 0.5;
+  if (absnum === 2) return true;
+  for (let i = 2; i <= f + 1; i += 1) {
+    if (absnum % i === 0) return false;
+  }
+  return true;
 }
 
 /**

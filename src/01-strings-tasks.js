@@ -278,9 +278,7 @@ function isString(value) {
  *   'K♠' => 51
  */
 function getCardId(value) {
-  const suit = '♣♦♥♠';
-  const cards = 'A234567891JQK';
-  return suit.indexOf(value[value.length - 1]) * 13 + cards.indexOf(value[0]);
+  return '♣♦♥♠'.indexOf(value[value.length - 1]) * 13 + 'A234567891JQK'.indexOf(value[0]);
 }
 
 
