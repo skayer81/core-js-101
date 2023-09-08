@@ -362,10 +362,19 @@ function toNaryString(num, n) {
  *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
  *   ['/web/favicon.ico', '/web-scripts/dump', '/verbalizer/logs'] => '/'
  */
-function getCommonDirectoryPath(/* pathes */) {
-  throw new Error('Not implemented');
+function getCommonDirectoryPath(pathes) {
+  let result = '';
+  pathes.sort((a, b) => a.length - b.length);
+  for (let i = 0; i < pathes[0].length; i += 1) {
+    let f = true;
+    pathes.forEach((elem) => {
+      f = (elem[i] === pathes[0][i]) && f;
+    });
+    if (f) result = `${result}${pathes[0][i]}`;
+    else break;
+  }
+  return result.slice(0, result.lastIndexOf('/') + 1);
 }
-
 
 /**
  * Returns the product of two specified matrixes.
@@ -385,8 +394,19 @@ function getCommonDirectoryPath(/* pathes */) {
  *                         [ 6 ]]
  *
  */
-function getMatrixProduct(/* m1, m2 */) {
-  throw new Error('Not implemented');
+function getMatrixProduct(m1, m2) {
+  const result = new Array(m1.length);
+  for (let i = 0; i < m1.length; i += 1) result[i] = new Array(m1.length);
+  for (let i = 0; i < m1.length; i += 1) {
+    for (let j = 0; j < m1.length; j += 1) {
+      let s = 0;
+      for (let k = 0; k < m2.length; k += 1) {
+        s += m1[i][k] * m2[k][j];
+      }
+      result[i][j] = s;
+    }
+  }
+  return result;
 }
 
 
